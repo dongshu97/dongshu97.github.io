@@ -189,24 +189,28 @@
     }
 
       .meta-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
 
-  .meta-item {
-    padding: 14px;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: rgba(255,255,255,0.45);
-  }
+.meta-item {
+  padding: 14px;
+  border: 1px solid rgba(29,27,25,0.12);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.45);
+}
 
-  .meta-item span {
-    display: block;
-    font-size: 0.83rem;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
+.meta-item span {
+  display: block;
+  font-size: 0.83rem;
+  color: #6b645d;
+  margin-bottom: 4px;
+}
+
+.meta-item:last-child {
+  grid-column: 1 / -1;
+}
 
     .section-head {
       display: flex;
@@ -430,7 +434,7 @@
         <div class="meta-grid">
             <div class="meta-item">
               <span>Based in</span>
-              France
+              Orsay, France
             </div>
           
             <div class="meta-item">
@@ -442,11 +446,7 @@
               <span>Email</span>
               liudongshu97@gmail.com
             </div>
-          
-            <div class="meta-item">
-              <span>Status</span>
-              PhD defense completed in 2025
-            </div>
+        
           </div>
       </aside>
     </section>
