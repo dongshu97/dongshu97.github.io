@@ -1,25 +1,642 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的个人网站</title>
+  <title>Dongshu Liu — Research & Visual Works</title>
+  <meta name="description" content="Personal website of Dongshu Liu — PhD researcher in neuromorphic computing / deep learning / high performance calculations." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 20px;
-      line-height: 1.7;
+    :root {
+      --bg: #f6f2eb;
+      --paper: rgba(255,255,255,0.72);
+      --text: #1d1b19;
+      --muted: #6b645d;
+      --line: rgba(29,27,25,0.12);
+      --accent: #294b5f;
+      --accent-2: #84664c;
+      --shadow: 0 12px 40px rgba(0,0,0,0.08);
+      --radius: 24px;
+      --max: 1160px;
     }
-    h1 { margin-bottom: 10px; }
-    a { color: #0366d6; text-decoration: none; }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,102,76,0.10), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(41,75,95,0.12), transparent 32%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .section { padding: 36px 0 18px; }
+    .card {
+      background: var(--paper);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(246, 242, 235, 0.72);
+      border-bottom: 1px solid rgba(29,27,25,0.08);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-panel {
+      padding: 34px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(41,75,95,0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.55);
+      width: fit-content;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      margin-top: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 60ch;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.5);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-side {
+      padding: 26px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(41,75,95,0.2), rgba(132,102,76,0.12)),
+        #ddd;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      color: rgba(29,27,25,0.62);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.96rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta-item {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+
+    .section-note {
+      color: var(--muted);
+      max-width: 58ch;
+    }
+
+    .about-grid,
+    .research-grid,
+    .gallery-grid,
+    .pub-grid,
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .research-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+
+    .content-card { padding: 26px; }
+
+    .content-card p,
+    .content-card li {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(41,75,95,0.08);
+      color: var(--accent);
+      font-size: 0.88rem;
+      border: 1px solid rgba(41,75,95,0.12);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .time {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mini-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .research-card,
+    .gallery-card,
+    .pub-card,
+    .contact-card {
+      padding: 24px;
+      min-height: 100%;
+    }
+
+    .research-card h3,
+    .gallery-card h3,
+    .pub-card h3,
+    .contact-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .gallery-thumb {
+      aspect-ratio: 4 / 3;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(132,102,76,0.10), rgba(41,75,95,0.10)),
+        #ece6df;
+      margin-bottom: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 18px;
+      font-size: 0.92rem;
+    }
+
+    .list-clean {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-card {
+      padding: 22px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .about-grid,
+      .research-grid,
+      .gallery-grid,
+      .pub-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel { min-height: auto; }
+    }
+
+    @media (max-width: 720px) {
+      nav { align-items: start; flex-direction: column; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .hero-panel, .hero-side, .content-card, .research-card, .gallery-card, .pub-card, .contact-card { padding: 20px; }
+      h1 { font-size: 2.7rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>你好，我是你的名字</h1>
-  <p>这是我的个人网站。</p>
-  <p>我会在这里展示作品、简历和联系方式。</p>
-  <p><a href="https://github.com/你的用户名">我的 GitHub</a></p>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav>
+        <a href="#top" class="brand">Dongshu Liu</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="#works">Visual Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-panel card">
+        <div>
+          <span class="eyebrow">PhD Researcher in Neuromorphic Computing · Visual Artist</span>
+          <h1>Research, memory, and visual sensitivity.</h1>
+          <p class="lead">
+            I am Dongshu Liu, PhD graduate from Paris-Saclay University, working on in-memory neural networks, hardware-aware learning, and training under limited labels. 
+            I am curious about newly emerging AI algorithms and their applications.
+            Alongside research, I explore photography and gravure as ways of observing the living environments.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#research">Explore Research</a>
+            <a class="btn secondary" href="#works">View Visual Works</a>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="tag">In-memory Computing</span>
+          <span class="tag">Unsupervised Learning</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">High Performance Computing</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Photography</span>
+          <span class="tag">Gravure</span>
+        </div>
+      </div>
+
+      <aside class="hero-side card">
+        <div class="portrait">
+          Replace this block with your portrait photo<br />
+          <small>Suggested file: images/profile.jpg</small>
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span>Based in</span>
+            France
+          </div>
+          <div class="meta-item">
+            <span>Languages</span>
+            English · French · Chinese
+          </div>
+          <div class="meta-item">
+            <span>Email</span>
+            liudongshu97@gmail.com
+          </div>
+          <div class="meta-item">
+            <span>Status</span>
+            PhD defense completed in 2025
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">About</h2>
+        </div>
+        <p class="section-note">A homepage designed to balance academic clarity with an artistic atmosphere.</p>
+      </div>
+      <div class="about-grid">
+        <div class="content-card card stack">
+          <p>
+            My research focuses on energy-efficient learning for neuromorphic hardware. I work on algorithms that can train and adapt directly on constrained in-memory systems, especially under limited labels, device imperfections, and write/read consistency challenges.
+          </p>
+          <p>
+            In parallel, my personal visual practice includes photography, lino-gravure, mokulitho, and photo-gravure. These works often engage with architecture, natural textures, and the relationship between people and landscape.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">JAX</span>
+            <span class="tag">Julia</span>
+            <span class="tag">C / C++</span>
+          </div>
+        </div>
+
+        <div class="content-card card">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="time">2021 — Present</div>
+              <div>
+                <div class="mini-title">PhD · Paris-Saclay University</div>
+                <p>Physics and neuromorphic computing, with research on in-memory neural networks.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">2019 — 2021</div>
+              <div>
+                <div class="mini-title">MSc · ENSTA Paris</div>
+                <p>Applied mathematics, modeling, and simulation.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="time">2015 — 2019</div>
+              <div>
+                <div class="mini-title">BSc · Nanjing University of Science and Technology</div>
+                <p>Materials science and engineering.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Selected Research</h2>
+        </div>
+        <p class="section-note">Three themes that define the core of the site’s research presentation.</p>
+      </div>
+      <div class="research-grid">
+        <article class="research-card card">
+          <h3>Unsupervised End-to-End Training</h3>
+          <p>
+            A resource-efficient pseudo-labeling strategy based on winner-take-all selectivity and homeostasis,
+            enabling unsupervised or semi-supervised training on hardware originally designed for supervised learning.
+          </p>
+        </article>
+        <article class="research-card card">
+          <h3>Hardware-Aware Learning</h3>
+          <p>
+            Integration of memristor non-idealities such as nonlinear writes, variability, and noise into gradient-based training,
+            with an emphasis on mitigating degradation through algorithmic tuning.
+          </p>
+        </article>
+        <article class="research-card card">
+          <h3>Dynamic Synapse Network</h3>
+          <p>
+            A framework combining volatile and non-volatile memory behavior at the synapse level to support write/read consistency
+            with reduced circuit complexity and memory overhead.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="works" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Visual Works</h2>
+        </div>
+        <p class="section-note">A portfolio section structured around media and recurring visual themes.</p>
+      </div>
+      <div class="gallery-grid">
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Add 1–3 images here<br />Lino-gravure</div>
+          <h3>Lino-gravure</h3>
+          <p>Printmaking works with strong contrasts, hand-carved texture, and expressive compositional rhythm.</p>
+        </article>
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Add 1–3 images here<br />Mokulitho / Photo-gravure</div>
+          <h3>Print Experiments</h3>
+          <p>Wood and lithographic processes, along with photo-gravure, bridging traditional craft and image translation.</p>
+        </article>
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Add 1–3 images here<br />Architecture & structure</div>
+          <h3>Photography · Structure</h3>
+          <p>Architectural frames and urban geometry from France, Italy, and China, often in black and white.</p>
+        </article>
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Add 1–3 images here<br />Nature</div>
+          <h3>Photography · Nature</h3>
+          <p>Landscapes and plant studies, with attention to tone, mist, repetition, and spatial calm.</p>
+        </article>
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Add 1–3 images here<br />People</div>
+          <h3>Photography · People</h3>
+          <p>Everyday human presence within rural and natural environments, especially in Yunnan, China.</p>
+        </article>
+        <article class="gallery-card card">
+          <div class="gallery-thumb">Optional full gallery page</div>
+          <h3>Expanded Portfolio</h3>
+          <p>Create a separate <code>works.html</code> page later if you want to showcase many images with captions and locations.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="publications" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Publications & Talks</h2>
+        </div>
+        <p class="section-note">You can later link each item to Google Scholar, DOI pages, or PDF copies.</p>
+      </div>
+      <div class="pub-grid">
+        <article class="pub-card card">
+          <h3>Selected Publications</h3>
+          <ul class="list-clean">
+            <li><strong>2024</strong> — Unsupervised end-to-end training with a self-defined target</li>
+            <li><strong>2025</strong> — Algorithms for Tackling Limited Labels, Device Imperfections, and Write/Read Consistency in In-Memory Neural Networks</li>
+            <li><strong>2025</strong> — Self-contrastive forward-forward algorithm</li>
+            <li><strong>2024</strong> — In silico analysis shows that dynamic changes in curvature guide cell migration over long distances</li>
+          </ul>
+        </article>
+        <article class="pub-card card">
+          <h3>Conferences</h3>
+          <ul class="list-clean">
+            <li>Nature Neuromorphic Computing · Beijing · Poster</li>
+            <li>Memristive Materials, Devices & Systems · Turin · Talk</li>
+            <li>Neuromorphic, Natural and Physical Computing · Hanover · Poster</li>
+            <li>Nature Conference on Artificial Intelligence · Bonn · Poster</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Contact</h2>
+        </div>
+        <p class="section-note">Keep this section simple and easy to update after deployment.</p>
+      </div>
+      <div class="contact-grid">
+        <article class="contact-card card">
+          <h3>Get in touch</h3>
+          <p>Email: <a href="mailto:liudongshu97@gmail.com">liudongshu97@gmail.com</a></p>
+          <p style="margin-top:10px;">GitHub: <a href="https://github.com/your-username">github.com/your-username</a></p>
+          <p style="margin-top:10px;">LinkedIn / Google Scholar / Portfolio links can be added here.</p>
+        </article>
+        <article class="contact-card card">
+          <h3>Deployment notes</h3>
+          <ul class="list-clean">
+            <li>Save this file as <code>index.html</code>.</li>
+            <li>Create an <code>images/</code> folder for profile and portfolio images.</li>
+            <li>Upload to your GitHub Pages repository.</li>
+            <li>Replace placeholder links and text with your final public profiles.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-card card">
+        <span>© 2025 Dongshu Liu</span>
+        <span>Designed for GitHub Pages · Single-file HTML template</span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
