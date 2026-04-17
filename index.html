@@ -79,7 +79,7 @@
     .hero {
       padding: 56px 0 28px;
       display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
+      grid-template-columns: 1.5fr 0.7fr;
       gap: 24px;
       align-items: stretch;
     }
@@ -173,7 +173,7 @@
     }
 
     .portrait {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4 / 3;
       border-radius: 20px;
       overflow: hidden;
       background:
@@ -188,25 +188,25 @@
       font-size: 0.96rem;
     }
 
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
+      .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 
-    .meta-item {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.45);
-    }
+  .meta-item {
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.45);
+  }
 
-    .meta-item span {
-      display: block;
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
+  .meta-item span {
+    display: block;
+    font-size: 0.83rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
 
     .section-head {
       display: flex;
@@ -400,11 +400,12 @@
       <div class="hero-panel card">
         <div>
           <span class="eyebrow">PhD Researcher in Neuromorphic Computing · Visual Artist</span>
-          <h1>Research, memory, and visual sensitivity.</h1>
+          <h1 style="font-size: 2.2rem;">Nice to Meet you</h1>
           <p class="lead">
-            I am Dongshu Liu, PhD graduate from Paris-Saclay University, working on in-memory neural networks, hardware-aware learning, and training under limited labels. 
-            I am curious about newly emerging AI algorithms and their applications.
-            Alongside research, I explore photography and gravure as ways of observing the living environments.
+            I am Dongshu Liu, a PhD graduate from Paris-Saclay University. Before that, I earned my engineering degree (ingénieur diplômé) from ENSTA-Paris and a bachelor's degree in China. 
+            Beyond my formal education, I am deeply curious about everything and fascinated by the act of creating new things—whether in science, art, or literature. 
+            I also have a simple love for coconut and orange. 
+            Generally speaking, I might be an interesting person to know.
           </p>
           <div class="hero-actions">
             <a class="btn primary" href="#research">Explore Research</a>
@@ -427,40 +428,44 @@
           <img src="images/portrait.JPG" alt="Portrait of Dongshu Liu" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="meta-grid">
-          <div class="meta-item">
-            <span>Based in</span>
-            France
+            <div class="meta-item">
+              <span>Based in</span>
+              France
+            </div>
+          
+            <div class="meta-item">
+              <span>Languages</span>
+              English · French · Chinese
+            </div>
+          
+            <div class="meta-item">
+              <span>Email</span>
+              liudongshu97@gmail.com
+            </div>
+          
+            <div class="meta-item">
+              <span>Status</span>
+              PhD defense completed in 2025
+            </div>
           </div>
-          <div class="meta-item">
-            <span>Languages</span>
-            English · French · Chinese
-          </div>
-          <div class="meta-item">
-            <span>Email</span>
-            liudongshu97@gmail.com
-          </div>
-          <div class="meta-item">
-            <span>Status</span>
-            PhD defense completed in 2025
-          </div>
-        </div>
       </aside>
     </section>
 
-    <section id="about" class="section">
+    <section id="research" class="section">
       <div class="section-head">
         <div>
-          <h2 class="section-title">About</h2>
+          <h2 class="section-title">About Research</h2>
         </div>
-        <p class="section-note">A homepage designed to balance academic clarity with an artistic atmosphere.</p>
       </div>
       <div class="about-grid">
         <div class="content-card card stack">
           <p>
-            My research focuses on energy-efficient learning for neuromorphic hardware. I work on algorithms that can train and adapt directly on constrained in-memory systems, especially under limited labels, device imperfections, and write/read consistency challenges.
+           "My research focuses on energy-efficient learning for neuromorphic hardware, developing bio-inspired algorithms that train and adapt directly on constrained in-memory systems under limited labels, device imperfections, and write/read consistency challenges. 
+            I am also interested in high-performance computing (GPU parallelization, CUDA), large AI models (ViT, Transformer), and reinforcement learning algorithms.  
           </p>
+
           <p>
-            In parallel, my personal visual practice includes photography, lino-gravure, mokulitho, and photo-gravure. These works often engage with architecture, natural textures, and the relationship between people and landscape.
+            In parallel, I am also actively engaged in artistic visual practices, including photography, lino-gravure, mokulitho, and photo-gravure.
           </p>
           <div class="tag-row">
             <span class="tag">Python</span>
@@ -500,12 +505,12 @@
       </div>
     </section>
 
-    <section id="research" class="section">
+    <section id="phD" class="section">
       <div class="section-head">
         <div>
-          <h2 class="section-title">Selected Research</h2>
+          <h2 class="section-title">PhD Project</h2>
         </div>
-        <p class="section-note">Three themes that define the core of the site’s research presentation.</p>
+        <p class="section-note">Three main projects during my phD.</p>
       </div>
       <div class="research-grid">
         <article class="research-card card">
@@ -514,6 +519,11 @@
             A resource-efficient pseudo-labeling strategy based on winner-take-all selectivity and homeostasis,
             enabling unsupervised or semi-supervised training on hardware originally designed for supervised learning.
           </p>
+          <p>
+            A resource-efficient pseudo-labeling strategy based on winner-take-all selectivity and homeostasis,
+            enabling unsupervised or semi-supervised training on hardware originally designed for supervised learning.
+          </p>
+          
         </article>
         <article class="research-card card">
           <h3>Hardware-Aware Learning</h3>
